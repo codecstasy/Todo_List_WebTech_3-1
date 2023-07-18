@@ -1,0 +1,134 @@
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #90f09e;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #58a063;
+}
+
+.todo-box {
+  /* background-color: red; */
+}
+
+li {
+}
+
+body {
+  /* background-color: red; */
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #f8f9fa;
+}
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup-box,
+.login-box,
+.todo-box {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  list-style: none;
+  width: 400px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.todo-list {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.add-item-button {
+  background-color: #5e7fa0;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-item-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.todo-footer {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* The container */
+.todo-container {
+  display: flex;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.todo-name-box {
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.todo-container input {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.done-todo-container {
+  background: #cbf3c9;
+  /* text-decoration: line-through; */
+}
+
+.todo-title {
+  flex: 1;
+}
+
+.delete-button {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+}

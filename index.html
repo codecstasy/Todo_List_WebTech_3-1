@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./main.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="login-box" style="display: none">
+        <div class="login-email-box">
+          <div class="login-email-label">Email</div>
+          <input name="email" class="login-email-input" />
+        </div>
+        <div class="login-password-box">
+          <div class="login-password-label">Password</div>
+          <input name="password" class="login-password-input" type="password" />
+        </div>
+
+        <div class="login-submit-box" style="display: flex; gap: 20px">
+          <button class="login-submit-button">Login</button>
+          <div>Sign up?</div>
+        </div>
+      </div>
+
+      <div class="signup-box" style="display: none">
+        <div class="signup-name-box">
+          <div class="signup-name-label">Name</div>
+          <input class="signup-name-input" />
+        </div>
+        <div class="signup-email-box">
+          <div class="signup-email-label">Email</div>
+          <input class="signup-email-input" />
+        </div>
+        <div class="signup-password-box">
+          <div class="signup-password-label">Password</div>
+          <input class="signup-password-input" type="password" />
+        </div>
+        <div class="signup-confirm-password-box">
+          <div class="signup-confirm-password-label">Confirm Password</div>
+          <input class="signup-confirm-password-input" type="password" />
+        </div>
+        <div class="signup-submit-box">
+          <button class="signup-submit-button">Signup</button>
+        </div>
+      </div>
+
+      <div class="todo-box" style="display: none">
+        <div class="todo-name-box">Todo List</div>
+        <ul class="todo-list"></ul>
+        <div class="todo-footer">
+          <input class="add-item-input" />
+          <button class="add-item-button">Add Item</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
