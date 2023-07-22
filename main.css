@@ -64,7 +64,7 @@ ul {
 }
 
 .todo-list {
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -104,6 +104,34 @@ ul {
   cursor: pointer;
 }
 
+.edit-button {
+  display: none;
+  cursor: pointer;
+  cursor: pointer;
+  background-color: #ffa620;
+  color: white;
+  border: 1px solid #ccc;
+  display: none;
+}
+
+.todo-container:hover > .edit-button {
+  display: block;
+}
+
+.delete-button {
+  width: 30px;
+  cursor: pointer;
+  background-color: #ff2020;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 400px;
+  display: none;
+}
+
+.todo-container:hover > .delete-button {
+  display: block;
+}
+
 .todo-name-box {
   font-size: 24px;
   margin-top: 20px;
@@ -125,10 +153,15 @@ ul {
   flex: 1;
 }
 
-.delete-button {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
+.todo-editable {
+  padding: 5px;
+}
+
+[contenteditable="true"] {
+  outline: 1px solid #ccc;
+}
+
+.incorrect-password-error {
+  color: red;
+  display: none;
 }

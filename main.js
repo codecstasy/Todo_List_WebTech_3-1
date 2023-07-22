@@ -55,6 +55,43 @@ const createDeleteButton = (todoDataItem, todoElementRef) => {
   return deleteButton;
 };
 
+const createEditButton = (todoDataItem, todoElementRef) => {
+  const editButton = document.createElement("button");
+  editButton.innerHTML = "Edit";
+  editButton.className = "edit-button";
+  editButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isSaving = editButton.innerHTML === "Save";
+    editButton.innerHTML = isSaving ? "Edit" : "Save";
+    const todoTitle = todoElementRef.querySelector(".todo-title");
+    todoTitle.contentEditable = isSaving ? false : true;
+    todoTitle.classList.toggle("todo-editable");
+    todoTitle.focus();
+
+    const inputValues = {
+      userId: localStorage.getItem("id"),
+      todoItemId: todoDataItem.id,
+      value: todoTitle.innerHTML,
+      isDone: todoElementRef.querySelector("input").checked,
+    };
+    if (isSaving) {
+      fetch(`${baseUrl}/todos/update-todo-item`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputValues),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        });
+    }
+  });
+  return editButton;
+};
+
 const getTodoElement = (todo) => {
   const todoItem = document.createElement("li");
   todoItem.className = "todo-container";
@@ -73,9 +110,12 @@ const getTodoElement = (todo) => {
   todoItem.appendChild(todoTitle);
   todoItem.appendChild(span);
   const deleteButton = createDeleteButton(todo, todoItem);
+  const editButton = createEditButton(todo, todoItem);
+  todoItem.appendChild(editButton);
   todoItem.appendChild(deleteButton);
   todoItem.addEventListener("click", (e) => {
-    if (e.target.tagName === "INPUT") return;
+    if (e.target.tagName === "INPUT" || e.target.contentEditable === "true")
+      return;
     checkBox.click();
   });
   return todoItem;
@@ -97,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     const todoBox = document.querySelector(".todo-box");
     todoBox.style.display = "block";
+    const todoList = document.querySelector(".todo-list");
 
     const addTodoButton = document.querySelector(".add-item-button");
     addTodoButton.addEventListener("click", async () => {
@@ -122,6 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
           todoList.appendChild(todoItem);
           const inputNode = document.querySelector(".add-item-input");
           inputNode.value = "";
+          todoList.scrollTop = todoList.scrollHeight;
+          inputBox.focus();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -134,16 +177,29 @@ document.addEventListener("DOMContentLoaded", () => {
         addTodoButton.click();
       }
     });
+    inputBox.focus();
   } else {
     const loginBox = document.querySelector(".login-box");
     loginBox.style.display = "block";
+    const goToSignUpButton = document.querySelector(".goto-sign-up");
+    goToSignUpButton.addEventListener("click", () => {
+      loginBox.style.display = "none";
+      const signUpBox = document.querySelector(".signup-box");
+      signUpBox.style.display = "block";
+    });
   }
 
   // login
   const submitButton = document.querySelector(".login-submit-button");
   submitButton.addEventListener("click", async () => {
+    const email = document.querySelector(".login-email-input").value;
+    if (email === "") {
+      const errorText = document.querySelector(".incorrect-password-error");
+      errorText.style.display = "block";
+      return;
+    }
     const inputValues = {
-      email: document.querySelector(".login-email-input").value,
+      email,
       password: document.querySelector(".login-password-input").value,
     };
     console.log('"~~~ hello', inputValues);
@@ -164,6 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.reload();
       })
       .catch((error) => {
+        const errorText = document.querySelector(".incorrect-password-error");
+        errorText.style.display = "block";
+        localStorage.clear();
         console.error("Error:", error);
       });
   });
@@ -171,9 +230,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // signup
   const signUp = document.querySelector(".signup-submit-button");
   signUp.addEventListener("click", async () => {
+    const email = document.querySelector(".signup-email-input").value;
+    if (!email.includes("@")) {
+      alert("Invalid email");
+      return;
+    }
     const inputValues = {
       name: document.querySelector(".signup-name-input").value,
-      email: document.querySelector(".signup-email-input").value,
+      email,
       password: document.querySelector(".signup-password-input").value,
       confirmPassword: document.querySelector(".signup-confirm-password-input")
         .value,
@@ -193,15 +257,30 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (!data.token) {
+          alert(data.message);
+          return;
+        }
         console.log("Success:", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("token", data.token);
         localStorage.setItem("name", data.user.name);
         localStorage.setItem("email", data.user.email);
         localStorage.setItem("id", data.user.id);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+  });
+
+  // logout
+  const logoutButton = document.querySelector(".todo-logout-button");
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    localStorage.removeItem("id");
+    window.location.reload();
   });
 });

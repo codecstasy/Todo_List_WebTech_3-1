@@ -53,8 +53,11 @@ router.post("/signup", async (req, res) => {
 
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
+  console.log("~~~~ name, email, password", { name, email, password });
 
-  const newUser = await createUser(name, email, passwordHash);
+  await createUser(name, email, passwordHash);
+  const newUser = await getUserByEmail(email);
+  console.log("~~~~ newUser", newUser);
 
   const token = jwt.sign(
     { email, name, id: newUser?.id, type: newUser?.type },

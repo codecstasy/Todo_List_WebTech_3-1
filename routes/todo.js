@@ -17,9 +17,9 @@ export default router;
 const createTodo = async (title, userId) => {
   return await dbClient.query(
     `
-        INSERT INTO users (
+        INSERT INTO todos (
             title,
-            userId
+            user_id
         )
         VALUES
             ('${title}', '${userId}'); 
@@ -107,7 +107,7 @@ router.post("/update-todo-item", async (req, res) => {
   console.log("~~~ req.body", req.body);
 
   const { value, isDone, userId, todoItemId } = req.body;
-  updateTodoItem(value, isDone, todoItemId);
+  await updateTodoItem(value, isDone, todoItemId);
   const rows = await getTodosByUserId(userId);
   res.send(rows);
 });
