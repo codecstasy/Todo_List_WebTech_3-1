@@ -2,7 +2,7 @@ import pg from "pg";
 
 export const dbClient = new pg.Client({
   connectionString:
-    "postgresql://postgres:d2e9n7VfXVPVhatf@db.siywtvvbtmamcuuaaztu.supabase.co:5432/postgres",
+    "postgresql://postgres:Shattik_2023@db.lokznrqtrearfewwvmqs.supabase.co:5432/postgres",
 });
 console.log("hi");
 await dbClient.connect();

@@ -44,7 +44,7 @@ body {
 .signup-box,
 .login-box,
 .todo-box {
-  /* background-color: red; */
+  /* background-color:#90f09e; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,6 +78,69 @@ ul {
   border-radius: 5px;
 }
 
+.signup-submit-button {
+  background-color: #5e7fa0;
+  border: none;
+  color: #ffffff;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 7px;
+  border-style:solid;
+}
+
+.login-submit-button {
+  background-color: #5e7fa0;
+  border: none;
+  color: #ffffff;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 7px;
+  border-style:solid;
+}
+
+.app {
+  background-color: #b4d5f5;
+  padding: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  border: 1px solid #000000;
+}
+
+.app h1 {
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+.todo-logout-button {
+  background-color: #5e7fa0;
+  border: none;
+  color: #ffffff;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 7px;
+  border-style:solid;
+}
+
+.goto-sign-up {
+  background-color: #5e7fa0;
+  border: none;
+  color: #ffffff;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 7px;
+  border-style:solid;
+}
+
 .add-item-input {
   padding: 5px;
   border: 1px solid #ccc;
@@ -100,7 +163,7 @@ ul {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding: 20px;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #cbf3c9;
   cursor: pointer;
 }
 
@@ -118,6 +181,10 @@ ul {
   display: block;
 }
 
+.todo-container:hover > .delete-button {
+  display: block;
+}
+
 .delete-button {
   width: 30px;
   cursor: pointer;
@@ -126,10 +193,6 @@ ul {
   border: 1px solid #ccc;
   border-radius: 400px;
   display: none;
-}
-
-.todo-container:hover > .delete-button {
-  display: block;
 }
 
 .todo-name-box {
@@ -145,8 +208,11 @@ ul {
 }
 
 .done-todo-container {
-  background: #cbf3c9;
-  /* text-decoration: line-through; */
+  background-color: #98cc86;
+}
+
+.done-todo-container > .todo-title {
+  text-decoration: line-through;
 }
 
 .todo-title {
